@@ -213,6 +213,9 @@ if [ "$TRAVIS_COMMIT" != "$target_commit_sha" ] ; then
     BODY="$UPLOADTOOL_BODY"
   fi
 
+
+  echo --CREATE RELEASE REQ: '{"tag_name": "'"$RELEASE_NAME"'","target_commitish": "'"$TRAVIS_COMMIT"'","name": "'"$RELEASE_TITLE"'","body": "'"$BODY"'","draft": false,"prerelease": '$is_prerelease'}'
+
   release_infos=$(curl -H "Authorization: token ${GITHUB_TOKEN}" \
        --data '{"tag_name": "'"$RELEASE_NAME"'","target_commitish": "'"$TRAVIS_COMMIT"'","name": "'"$RELEASE_TITLE"'","body": "'"$BODY"'","draft": false,"prerelease": '$is_prerelease'}' "https://api.github.com/repos/$REPO_SLUG/releases")
 
